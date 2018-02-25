@@ -1,8 +1,11 @@
 extends Area2D
 
+signal hit;
+
 export (int) var SPEED;
 var velocity = Vector2();
 var screensize;
+var lastAnimation = 'idle';
 
 func _ready():
 	screensize = get_viewport_rect().size;
@@ -10,23 +13,27 @@ func _ready():
 	$move.play();
 	
 func _on_timer_timeout():
+	lastAnimation = 'idle';
 	$move.animation = 'idle';
 	$move.play();
 	
 func _process(delta):
 	velocity = Vector2();
 	if Input.is_action_pressed('ui_up'):
-		$move.animation = 'up';
+		lastAnimation = 'up';
 		velocity.y -= 1;
 	if Input.is_action_pressed('ui_down'):
-		$move.animation = 'down';
+		lastAnimation = 'down';
 		velocity.y += 1;
 	if Input.is_action_pressed('ui_left'):
-		$move.animation = 'left';
+		lastAnimation = 'left';
 		velocity.x -= 1;
 	if Input.is_action_pressed('ui_right'):
-		$move.animation = 'right';
+		lastAnimation = 'right';
 		velocity.x += 1;
+		
+	if lastAnimation != 'idle':
+		$move.animation = lastAnimation;
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED;
@@ -43,3 +50,15 @@ func _process(delta):
 	position += velocity * delta;
 	position.x = clamp(position.x, 0, screensize.x);
 	position.y = clamp(position.y, 0, screensize.y);
+
+
+func _on_Player_body_entered( body ):
+	hide();
+	emit_signal('hit');
+	$CollisionShape2D.disabled = true;
+	
+func start(pos):
+	position = pos;
+	show();
+	$CollisionShape2D.disabled = false;
+	
