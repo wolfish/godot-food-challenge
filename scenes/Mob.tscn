@@ -1,4 +1,27 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/Mob.gd" type="Script" id=1]
+[ext_resource path="res://sprites/projectiles/negative/washing_1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/projectiles/negative/cooking_1.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "dishes",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "cooking",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
 
 [node name="Mob" type="RigidBody2D"]
 
@@ -21,10 +44,32 @@ linear_velocity = Vector2( 0, 0 )
 linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
+script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
+__meta__ = {
+"_edit_group_": true
+}
+MAX_SPEED = 250
+MIN_SPEED = 150
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
-animation = "default"
+frames = SubResource( 1 )
+animation = "dishes"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 1.27581, 4.23039 )
+scale = Vector2( 2.87616, 2.59713 )
+shape = SubResource( 2 )
+
+[node name="Visibility" type="VisibilityNotifier2D" parent="." index="2"]
+
+rect = Rect2( -10, -10, 20, 20 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_screen_exited"]
 
 

@@ -8,15 +8,16 @@ var screensize;
 var lastAnimation = 'idle';
 
 func _ready():
+	hide();
 	screensize = get_viewport_rect().size;
 	$move_idle.connect('timeout', self, '_on_timer_timeout');
 	$move.play();
-	
+
 func _on_timer_timeout():
 	lastAnimation = 'idle';
 	$move.animation = 'idle';
 	$move.play();
-	
+
 func _process(delta):
 	velocity = Vector2();
 	if Input.is_action_pressed('ui_up'):
@@ -56,9 +57,8 @@ func _on_Player_body_entered( body ):
 	hide();
 	emit_signal('hit');
 	$CollisionShape2D.disabled = true;
-	
+
 func start(pos):
 	position = pos;
 	show();
 	$CollisionShape2D.disabled = false;
-	
