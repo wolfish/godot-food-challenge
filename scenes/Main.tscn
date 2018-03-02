@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Collectible.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/HUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -16,45 +17,53 @@ _data = {
 
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
+Collectible = ExtResource( 3 )
 
-[node name="Player" parent="." index="0" instance=ExtResource( 3 )]
+[node name="Player" parent="." index="0" instance=ExtResource( 4 )]
 
 SPEED = 300
 
 [node name="MobTimer" type="Timer" parent="." index="1"]
 
 process_mode = 1
-wait_time = 0.5
+wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="ScoreTimer" type="Timer" parent="." index="2"]
+[node name="CollectibleTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="StartTimer" type="Timer" parent="." index="3"]
+[node name="ScoreTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="StartTimer" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 2.0
 one_shot = true
 autostart = false
 
-[node name="StartPosition" type="Position2D" parent="." index="4"]
+[node name="StartPosition" type="Position2D" parent="." index="5"]
 
 position = Vector2( 322.128, 191.885 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="MobPath" type="Path2D" parent="." index="5"]
+[node name="MobPath" type="Path2D" parent="." index="6"]
 
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
 position = Vector2( -0.814972, -1.08249 )
-rotation = -0.00140649
+rotation = -0.00140652
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -63,11 +72,15 @@ cubic_interp = true
 loop = true
 lookahead = 4.0
 
-[node name="HUD" parent="." index="6" instance=ExtResource( 4 )]
+[node name="HUD" parent="." index="7" instance=ExtResource( 5 )]
+
+[connection signal="collected" from="Player" to="." method="collected"]
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+
+[connection signal="timeout" from="CollectibleTimer" to="." method="_on_CollectibleTimer_timeout"]
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 

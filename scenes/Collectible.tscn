@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Collectible.gd" type="Script" id=1]
+[ext_resource path="res://sprites/projectiles/positive/aquarium_1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/projectiles/positive/aquarium_2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/projectiles/positive/aquarium_3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/projectiles/positive/fries_1.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "aquarium",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "fries",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20.6907, 28.1319 )
+
+[node name="Collectible" type="RigidBody2D"]
+
+position = Vector2( 268.043, 192.233 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 0
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+MAX_SPEED = 200
+MIN_SPEED = 350
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+position = Vector2( -17.6232, -5.65286 )
+frames = SubResource( 1 )
+animation = "aquarium"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -11.8914, -3.80525 )
+shape = SubResource( 2 )
+
+[node name="Visibility" type="VisibilityNotifier2D" parent="." index="2"]
+
+position = Vector2( -13.1169, -18.3553 )
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_screen_exited"]
+
+

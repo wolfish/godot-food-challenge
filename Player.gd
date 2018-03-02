@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hit;
+signal collected;
 
 export (int) var SPEED;
 var velocity = Vector2();
@@ -54,9 +55,19 @@ func _process(delta):
 
 
 func _on_Player_body_entered( body ):
-	hide();
-	emit_signal('hit');
-	$CollisionShape2D.disabled = true;
+	var MobRegEx = RegEx.new();
+	MobRegEx.compile('Mob');
+	
+	var CollectibleRegEx = RegEx.new();
+	CollectibleRegEx.compile('Collectible');
+	
+	if MobRegEx.search(body.name):
+		emit_signal('hit');
+		$CollisionShape2D.disabled = true;
+		hide();
+	elif CollectibleRegEx.search(body.name):
+		body.queue_free();
+		emit_signal('collected');
 
 func start(pos):
 	position = pos;

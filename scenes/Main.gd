@@ -1,6 +1,7 @@
 extends Node
 
 export (PackedScene) var Mob;
+export (PackedScene) var Collectible;
 var score;
 
 func _ready():
@@ -9,8 +10,8 @@ func _ready():
 
 func game_over():
 	print('game over runned');
-	$ScoreTimer.stop();
 	$MobTimer.stop();
+	$CollectibleTimer.stop();
 	$HUD.show_game_over();
 
 func new_game():
@@ -24,27 +25,30 @@ func new_game():
 func _on_StartTimer_timeout():
 	print('start timer timeout');
 	$MobTimer.start();
+	$CollectibleTimer.start();
 	$ScoreTimer.start();
 
-func _on_ScoreTimer_timeout():
-	print('score tick!');
-	score += 1;
+func _on_MobTimer_timeout():
+	$MobPath/MobSpawnLocation.set_offset(randi());
+	var mob = Mob.instance();
+	add_child(mob);
+	var direction = $MobPath/MobSpawnLocation.rotation + PI/2;
+	mob.position = $MobPath/MobSpawnLocation.position;
+	direction += rand_range(-PI/4, PI/4);
+	mob.rotation = direction;
+	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction));
+
+func collected():
+	score += 100;
 	$HUD.update_score(score);
 
-func _on_MobTimer_timeout():
-	print('mob timeout');
-	# choose a random location on the Path2D
-	$MobPath/MobSpawnLocation.set_offset(randi())
-	# create a Mob instance and add it to the scene
-	var mob = Mob.instance()
-	add_child(mob)
-	# set the mob's direction perpendicular to the path direction
-	var direction = $MobPath/MobSpawnLocation.rotation + PI/2
-	# set the mob's position to the random location
-	mob.position = $MobPath/MobSpawnLocation.position
-	# add some randomness to the direction
-	direction += rand_range(-PI/4, PI/4)
-	mob.rotation = direction
-	# choose the velocity
-	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction))
 
+func _on_CollectibleTimer_timeout():
+	$MobPath/MobSpawnLocation.set_offset(randi());
+	var collectible = Collectible.instance();
+	add_child(collectible);
+	var direction = $MobPath/MobSpawnLocation.rotation + PI/2;
+	collectible.position = $MobPath/MobSpawnLocation.position;
+	direction += rand_range(-PI/4, PI/4);
+	collectible.rotation = direction;
+	collectible.set_linear_velocity(Vector2(rand_range(collectible.MIN_SPEED, collectible.MAX_SPEED), 0).rotated(direction));
