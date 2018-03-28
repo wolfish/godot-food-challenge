@@ -1,20 +1,20 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Mob.gd" type="Script" id=1]
-[ext_resource path="res://sprites/projectiles/negative/washing_1.png" type="Texture" id=2]
-[ext_resource path="res://sprites/projectiles/negative/cooking_1.png" type="Texture" id=3]
+[ext_resource path="res://sprites/projectiles/negative/cooking_1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/projectiles/negative/washing_1.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "dishes",
+"name": "cooking",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "cooking",
+"name": "dishes",
 "speed": 5.0
 } ]
 

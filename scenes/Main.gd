@@ -10,6 +10,8 @@ func _ready():
 
 func game_over():
 	print('game over runned');
+	$Player.get_node('CollisionShape2D').disabled = true;
+	$Player.hide();
 	$MobTimer.stop();
 	$CollectibleTimer.stop();
 	$HUD.show_game_over();
@@ -41,6 +43,31 @@ func _on_MobTimer_timeout():
 func collected():
 	score += 100;
 	$HUD.update_score(score);
+	if $Player.HEALTH < $Player.MAXHEALTH:
+		$Player.HEALTH += 1;
+		var newScale = 1;
+		if $Player.HEALTH != 1:
+			newScale = (float($Player.HEALTH) / 10) + 1;
+		$Player.SPEED -= 30;
+		$Player.scale = Vector2(newScale, newScale);
+
+func hit():
+	if score > 200:
+		score -= 200;
+	else:
+		score = 0;
+		
+	$HUD.update_score(score);
+	
+	if $Player.HEALTH > 1:
+		$Player.HEALTH -= 1;
+		var newScale = 1;
+		if $Player.HEALTH != 1:
+			newScale = (float($Player.HEALTH) / 10) + 1;
+		$Player.SPEED += 30;
+		$Player.scale = Vector2(newScale, newScale);
+	else:
+		game_over();
 
 
 func _on_CollectibleTimer_timeout():

@@ -10,7 +10,7 @@ config_version=3
 
 [application]
 
-config/name="Tyldzia Dodge Work"
+config/name="godot-food-challenge"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 

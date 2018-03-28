@@ -22,6 +22,8 @@ Collectible = ExtResource( 3 )
 [node name="Player" parent="." index="0" instance=ExtResource( 4 )]
 
 SPEED = 300
+HEALTH = 1
+MAXHEALTH = 6
 
 [node name="MobTimer" type="Timer" parent="." index="1"]
 
@@ -76,7 +78,7 @@ lookahead = 4.0
 
 [connection signal="collected" from="Player" to="." method="collected"]
 
-[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="hit" from="Player" to="." method="hit"]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
 

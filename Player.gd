@@ -4,6 +4,8 @@ signal hit;
 signal collected;
 
 export (int) var SPEED;
+export (int) var HEALTH;
+export (int) var MAXHEALTH;
 var velocity = Vector2();
 var screensize;
 var lastAnimation = 'idle';
@@ -62,9 +64,8 @@ func _on_Player_body_entered( body ):
 	CollectibleRegEx.compile('Collectible');
 	
 	if MobRegEx.search(body.name):
+		body.queue_free();
 		emit_signal('hit');
-		$CollisionShape2D.disabled = true;
-		hide();
 	elif CollectibleRegEx.search(body.name):
 		body.queue_free();
 		emit_signal('collected');
