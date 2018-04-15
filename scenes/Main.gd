@@ -43,6 +43,7 @@ func _on_MobTimer_timeout():
 func collected():
 	score += 100;
 	$HUD.update_score(score);
+	$HUD.add_life();
 	if $Player.HEALTH < $Player.MAXHEALTH:
 		$Player.HEALTH += 1;
 		var newScale = 1;
@@ -58,6 +59,7 @@ func hit():
 		score = 0;
 		
 	$HUD.update_score(score);
+	$HUD.sub_life();
 	
 	if $Player.HEALTH > 1:
 		$Player.HEALTH -= 1;
