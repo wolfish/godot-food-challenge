@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game;
+var gameStarted = false;
 
 func show_message(text):
 	$MessageLabel.text = text;
@@ -8,9 +9,9 @@ func show_message(text):
 	$MessageTimer.start();
 
 func show_game_over():
+	gameStarted = false;
 	show_message("KONIEC GRY!");
 	yield($MessageTimer, "timeout");
-	$StartButton.show();
 	$MessageLabel.text = "PRZEGRAŁEŚ!\nZAGRAJ PONOWNIE!";
 	$MessageLabel.show();
 
@@ -25,8 +26,14 @@ func sub_life():
 
 func _on_StartButton_pressed():
 	$StartButton.hide();
+	gameStarted = true;
 	add_life();
 	emit_signal("start_game");
+	
+func _on_MessageTimer_gameOverTimeout():
+	if !gameStarted:
+		$StartButton.show();
 
 func _on_MessageTimer_timeout():
-	$MessageLabel.hide();
+	if gameStarted:
+		$MessageLabel.hide();

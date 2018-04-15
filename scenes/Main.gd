@@ -9,7 +9,6 @@ func _ready():
 	randomize();
 
 func game_over():
-	print('game over runned');
 	$Player.get_node('CollisionShape2D').disabled = true;
 	$Player.hide();
 	$MobTimer.stop();
@@ -17,7 +16,6 @@ func game_over():
 	$HUD.show_game_over();
 
 func new_game():
-	print('new game runned');
 	score = 0;
 	$Player.start($StartPosition.position);
 	$StartTimer.start();
@@ -25,7 +23,6 @@ func new_game():
 	$HUD.show_message("Przygotuj się!");
 
 func _on_StartTimer_timeout():
-	print('start timer timeout');
 	$MobTimer.start();
 	$CollectibleTimer.start();
 	$ScoreTimer.start();
