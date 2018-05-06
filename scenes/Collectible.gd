@@ -3,7 +3,7 @@ extends RigidBody2D
 export (int) var MAX_SPEED;
 export (int) var MIN_SPEED;
 var collectible_types = [
-	'aquarium',
+	'hamburger',
 	'fries'
 ];
 

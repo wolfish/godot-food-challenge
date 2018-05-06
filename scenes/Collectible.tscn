@@ -1,22 +1,20 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Collectible.gd" type="Script" id=1]
-[ext_resource path="res://sprites/projectiles/positive/aquarium_1.png" type="Texture" id=2]
-[ext_resource path="res://sprites/projectiles/positive/aquarium_2.png" type="Texture" id=3]
-[ext_resource path="res://sprites/projectiles/positive/aquarium_3.png" type="Texture" id=4]
-[ext_resource path="res://sprites/projectiles/positive/fries_1.png" type="Texture" id=5]
+[ext_resource path="res://sprites/projectiles/positive/fries_1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/projectiles/positive/hamburger_1.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "aquarium",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "fries",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "hamburger",
 "speed": 5.0
 } ]
 
@@ -25,7 +23,7 @@ animations = [ {
 custom_solver_bias = 0.0
 extents = Vector2( 20.6907, 28.1319 )
 
-[node name="Collectible" type="RigidBody2D"]
+[node name="Collectible" type="RigidBody2D" index="0"]
 
 position = Vector2( 268.043, 192.233 )
 input_pickable = false
@@ -55,8 +53,7 @@ MIN_SPEED = 350
 
 position = Vector2( -17.6232, -5.65286 )
 frames = SubResource( 1 )
-animation = "aquarium"
-frame = 2
+animation = "hamburger"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]

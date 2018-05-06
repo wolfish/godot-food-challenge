@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/Mob.gd" type="Script" id=1]
 [ext_resource path="res://sprites/projectiles/negative/cooking_1.png" type="Texture" id=2]
-[ext_resource path="res://sprites/projectiles/negative/washing_1.png" type="Texture" id=3]
+[ext_resource path="res://sprites/projectiles/negative/apple_1.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -14,7 +14,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "dishes",
+"name": "apple",
 "speed": 5.0
 } ]
 
@@ -55,7 +55,7 @@ MIN_SPEED = 150
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 frames = SubResource( 1 )
-animation = "dishes"
+animation = "apple"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
