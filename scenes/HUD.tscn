@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/tahoma.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/VTMB_Malkavian_IS.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://sprites/hud/life.png" type="Texture" id=4]
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=1]
 
 size = 22
 use_mipmaps = false
@@ -13,9 +13,17 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
+[sub_resource type="DynamicFont" id=6]
+
+size = 22
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
 [sub_resource type="DynamicFont" id=2]
 
-size = 32
+size = 22
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
@@ -85,7 +93,7 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" index="0"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -110,7 +118,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 1 )
 text = "Punkty: 0"
 align = 1
 percent_visible = 1.0
@@ -118,16 +126,40 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Theme", "custom_fonts" ]
 
-[node name="MessageLabel" type="Label" parent="." index="1"]
+[node name="TimeLabel" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 245.0
+margin_top = 4.0
+margin_right = 431.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 6 )
+text = "Czas: 00:00"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="MessageLabel" type="Label" parent="." index="2"]
 
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -185.0
-margin_top = -155.0
+margin_top = -198.0
 margin_right = 221.0
-margin_bottom = 52.0
+margin_bottom = 9.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -145,16 +177,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="StartButton" type="Button" parent="." index="2"]
+[node name="StartButton" type="Button" parent="." index="3"]
 
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -97.0
-margin_top = -124.0
-margin_right = 136.0
-margin_bottom = -44.0
+margin_top = -227.0
+margin_right = 143.0
+margin_bottom = -185.0
 rect_rotation = 0.124134
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -170,19 +202,109 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "START!"
+text = "NOWA GRA"
 flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
 
-[node name="MessageTimer" type="Timer" parent="." index="3"]
+[node name="OptionsButton" type="Button" parent="." index="4"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.0
+margin_top = -171.0
+margin_right = 143.0
+margin_bottom = -129.0
+rect_rotation = 0.124134
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
+custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "OPCJE"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="ScoreButton" type="Button" parent="." index="5"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.0
+margin_top = -117.0
+margin_right = 143.0
+margin_bottom = -75.0
+rect_rotation = 0.124134
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
+custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "NAJLEPSZE WYNIKI"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="ExitButton" type="Button" parent="." index="6"]
+
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -97.0
+margin_top = -64.0
+margin_right = 143.0
+margin_bottom = -22.0
+rect_rotation = 0.124134
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
+custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "WYJDŹ Z GRY"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="MessageTimer" type="Timer" parent="." index="7"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="LifeBar" type="ProgressBar" parent="." index="4"]
+[node name="LifeBar" type="ProgressBar" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -210,16 +332,27 @@ rounded = false
 percent_visible = false
 _sections_unfolded = [ "Percent", "custom_styles" ]
 
-[node name="Sprite" type="Sprite" parent="." index="5"]
+[node name="Sprite" type="Sprite" parent="." index="9"]
 
 position = Vector2( 18.8366, 17.7285 )
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Material" ]
 
+[node name="ScoreTimer" type="Timer" parent="." index="10"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_gameOverTimeout"]
+
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 
 

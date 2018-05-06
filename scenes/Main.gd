@@ -5,21 +5,28 @@ export (PackedScene) var Collectible;
 var score;
 
 func _ready():
-	print('ready runned');
+	var screen_size = OS.get_screen_size();
+	var window_size = OS.get_window_size();
+	OS.set_window_position(screen_size*0.5 - window_size*0.5)
 	randomize();
 
 func game_over():
 	$Player.get_node('CollisionShape2D').disabled = true;
 	$Player.hide();
 	$MobTimer.stop();
+	$HUD.get_node('ScoreTimer').stop();
 	$CollectibleTimer.stop();
 	$HUD.show_game_over();
 
 func new_game():
 	score = 0;
+	$HUD.gameTimeSeconds = 0;
+	$HUD.gameTimeMinutes = 0;
 	$Player.start($StartPosition.position);
 	$StartTimer.start();
+	$HUD.get_node('ScoreTimer').start();
 	$HUD.update_score(score);
+	$HUD.update_time(0,0);
 	$HUD.show_message("Przygotuj się!");
 
 func _on_StartTimer_timeout():
