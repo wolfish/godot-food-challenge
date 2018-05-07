@@ -23,7 +23,7 @@ Collectible = ExtResource( 3 )
 
 SPEED = 300
 HEALTH = 1
-MAXHEALTH = 5
+MAXHEALTH = 3
 
 [node name="MobTimer" type="Timer" parent="." index="1"]
 

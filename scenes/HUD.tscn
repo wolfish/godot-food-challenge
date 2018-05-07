@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/tahoma.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://fonts/VTMB_Malkavian_IS.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://sprites/hud/life.png" type="Texture" id=4]
+[ext_resource path="res://sprites/hud/life.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -12,14 +11,6 @@ use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
-
-[sub_resource type="DynamicFont" id=6]
-
-size = 22
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
@@ -31,13 +22,45 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=3]
 
+size = 22
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
 size = 24
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 3 )
+font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="DynamicFont" id=5]
+
+size = 24
+use_mipmaps = true
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 24
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=7]
+
+size = 24
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+
+[sub_resource type="StyleBoxFlat" id=8]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -65,7 +88,7 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=9]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -142,7 +165,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 2 )
 text = "Czas: 00:00"
 align = 1
 percent_visible = 1.0
@@ -166,7 +189,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Unikaj zdrowej żywności!
 Zbieraj niezdrowe pyszności!
 
@@ -195,7 +218,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -225,7 +248,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -255,7 +278,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -285,7 +308,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -320,11 +343,11 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 0
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
 min_value = 0.0
 max_value = 100.0
-step = 20.0
+step = 34.0
 page = 0.0
 value = 0.0
 exp_edit = false
@@ -335,7 +358,7 @@ _sections_unfolded = [ "Percent", "custom_styles" ]
 [node name="Sprite" type="Sprite" parent="." index="9"]
 
 position = Vector2( 18.8366, 17.7285 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 _sections_unfolded = [ "Material" ]
 
 [node name="ScoreTimer" type="Timer" parent="." index="10"]

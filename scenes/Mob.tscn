@@ -70,6 +70,15 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="RotateTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 0.01
+one_shot = false
+autostart = true
+
 [connection signal="screen_exited" from="Visibility" to="." method="_on_Visibility_screen_exited"]
+
+[connection signal="timeout" from="RotateTimer" to="." method="_on_RotateTimer_timeout"]
 
 
