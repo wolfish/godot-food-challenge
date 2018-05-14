@@ -5,9 +5,22 @@ export (PackedScene) var Collectible;
 var score;
 
 func _ready():
+	# Center game window on screen
 	var screen_size = OS.get_screen_size();
 	var window_size = OS.get_window_size();
-	OS.set_window_position(screen_size*0.5 - window_size*0.5)
+	OS.set_window_position(screen_size*0.5 - window_size*0.5);
+	
+	# Set mob path around the screen edges
+	$MobPath.curve.clear_points();
+	$MobPath.curve.add_point(Vector2(0,0));
+	$MobPath.curve.add_point(Vector2(window_size[0],0));
+	$MobPath.curve.add_point(Vector2(window_size[0],window_size[1]));
+	$MobPath.curve.add_point(Vector2(0,window_size[1]));
+	$MobPath.curve.tessellate();
+	
+	# Center player position
+	$StartPosition.position = Vector2(window_size[0] / 2, window_size[1] / 2);
+	
 	randomize();
 
 func game_over():

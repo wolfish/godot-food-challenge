@@ -4,7 +4,7 @@
 [ext_resource path="res://sprites/hud/life.png" type="Texture" id=2]
 [ext_resource path="res://fonts/tahoma.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=1]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -32,7 +32,7 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=2]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -60,22 +60,6 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="DynamicFont" id=2]
-
-size = 22
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=1]
-
-size = 22
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
-
 [sub_resource type="DynamicFont" id=3]
 
 size = 22
@@ -86,7 +70,15 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=4]
 
-size = 24
+size = 22
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 22
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 3 )
@@ -100,7 +92,15 @@ use_filter = false
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
+
+size = 24
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=8]
 
 size = 24
 use_mipmaps = true
@@ -108,7 +108,7 @@ use_filter = false
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=9]
 
 size = 24
 use_mipmaps = false
@@ -164,8 +164,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
-margin_right = 620.0
-margin_bottom = 460.0
+margin_right = 780.0
+margin_bottom = 580.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -180,7 +180,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 612.0
+margin_right = 772.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -191,13 +191,32 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="LifeContainer" type="HBoxContainer" parent="Screen/Main/TopBar" index="0"]
+[node name="TextureRect" type="TextureRect" parent="Screen/Main/TopBar" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 200.0
+margin_right = 16.0
+margin_bottom = 28.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 2 )
+stretch_mode = 6
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="LifeContainer" type="HBoxContainer" parent="Screen/Main/TopBar" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_right = 268.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -214,7 +233,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 200.0
+margin_right = 248.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -222,8 +241,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/fg = SubResource( 8 )
-custom_styles/bg = SubResource( 9 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
 min_value = 0.0
 max_value = 100.0
 step = 34.0
@@ -234,40 +253,14 @@ rounded = false
 percent_visible = false
 _sections_unfolded = [ "Grow Direction", "Margin", "Percent", "Size Flags", "custom_styles" ]
 
-[node name="LifeSpriteContainer" type="HSplitContainer" parent="Screen/Main/TopBar" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 204.0
-margin_right = 204.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-split_offset = 0
-collapsed = false
-dragger_visibility = 0
-_sections_unfolded = [ "Size Flags" ]
-
-[node name="Sprite" type="Sprite" parent="Screen/Main/TopBar/LifeSpriteContainer" index="0"]
-
-position = Vector2( -189.384, 12.3476 )
-scale = Vector2( 1.5909, 1.5909 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Material" ]
-
 [node name="TimeContainer" type="HBoxContainer" parent="Screen/Main/TopBar" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 208.0
-margin_right = 408.0
+margin_left = 272.0
+margin_right = 520.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -284,8 +277,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 42.0
-margin_right = 158.0
+margin_left = 66.0
+margin_right = 182.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -293,7 +286,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Czas: 00:00"
 align = 1
 percent_visible = 1.0
@@ -307,8 +300,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 412.0
-margin_right = 612.0
+margin_left = 524.0
+margin_right = 772.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -325,8 +318,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 108.0
-margin_right = 200.0
+margin_left = 156.0
+margin_right = 248.0
 margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -334,7 +327,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 4 )
 text = "Punkty: 0"
 align = 1
 percent_visible = 1.0
@@ -348,16 +341,16 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 105.0
-margin_right = 612.0
-margin_bottom = 226.0
+margin_top = 165.0
+margin_right = 772.0
+margin_bottom = 286.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "Unikaj zdrowej żywności!
 Zbieraj niezdrowe pyszności!
 
@@ -374,9 +367,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 304.0
-margin_right = 612.0
-margin_bottom = 460.0
+margin_top = 424.0
+margin_right = 772.0
+margin_bottom = 580.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -392,7 +385,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 612.0
+margin_right = 772.0
 margin_bottom = 36.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -401,7 +394,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -420,7 +413,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 40.0
-margin_right = 612.0
+margin_right = 772.0
 margin_bottom = 76.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -429,7 +422,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -448,7 +441,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 80.0
-margin_right = 612.0
+margin_right = 772.0
 margin_bottom = 116.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -457,7 +450,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -476,7 +469,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 120.0
-margin_right = 612.0
+margin_right = 772.0
 margin_bottom = 156.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -485,7 +478,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color_disabled = Color( 0.968627, 0.0470588, 0.886275, 1 )
 custom_colors/font_color = Color( 0.96875, 0.0491943, 0.889726, 1 )
 toggle_mode = false
@@ -497,9 +490,9 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
 
-[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
-
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_gameOverTimeout"]
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 

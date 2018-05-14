@@ -28,7 +28,7 @@ MAXHEALTH = 3
 [node name="MobTimer" type="Timer" parent="." index="1"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.5
 one_shot = false
 autostart = false
 
