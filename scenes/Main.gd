@@ -3,6 +3,11 @@ extends Node
 export (PackedScene) var Mob;
 export (PackedScene) var Collectible;
 var score;
+var CollisionScoreLabelArray = [];
+
+const scoreReward = 100;
+const scorePenalty = -200;
+const playerSpeedChange = 30;
 
 func _ready():
 	# Center game window on screen
@@ -56,9 +61,27 @@ func _on_MobTimer_timeout():
 	direction += rand_range(-PI/4, PI/4);
 	mob.rotation = direction;
 	mob.set_linear_velocity(Vector2(rand_range(mob.MIN_SPEED, mob.MAX_SPEED), 0).rotated(direction));
+	
+func displayCollisionScoreLabel(score):
+	var CollisionScoreLabel = Label.new();
+	add_child(CollisionScoreLabel);
+	CollisionScoreLabelArray.push_back(CollisionScoreLabel);
+	
+	CollisionScoreLabel.margin_left = $Player.position[0];
+	CollisionScoreLabel.margin_top = $Player.position[1];
+	
+	if score > 0 :
+		CollisionScoreLabel.add_color_override("font_color", Color(0, 255, 0));
+		CollisionScoreLabel.text = "+" + str(score);
+	else:
+		CollisionScoreLabel.add_color_override("font_color", Color(255, 0, 0));
+		CollisionScoreLabel.text = str(score);
+		
+	$CollisionScoreTimer.start();
 
 func collected():
-	score += 100;
+	score += scoreReward;
+	displayCollisionScoreLabel(scoreReward);
 	$HUD.update_score(score);
 	$HUD.add_life();
 	if $Player.HEALTH < $Player.MAXHEALTH:
@@ -66,12 +89,13 @@ func collected():
 		var newScale = 1;
 		if $Player.HEALTH != 1:
 			newScale = (float($Player.HEALTH) / 10) + 1;
-		$Player.SPEED -= 30;
+		$Player.SPEED -= playerSpeedChange;
 		$Player.scale = Vector2(newScale, newScale);
 
 func hit():
-	if score > 200:
-		score -= 200;
+	if score > scorePenalty:
+		score -= scorePenalty;
+		displayCollisionScoreLabel(scorePenalty);
 	else:
 		score = 0;
 		
@@ -83,7 +107,7 @@ func hit():
 		var newScale = 1;
 		if $Player.HEALTH != 1:
 			newScale = (float($Player.HEALTH) / 10) + 1;
-		$Player.SPEED += 30;
+		$Player.SPEED += playerSpeedChange;
 		$Player.scale = Vector2(newScale, newScale);
 	else:
 		game_over();
@@ -98,3 +122,11 @@ func _on_CollectibleTimer_timeout():
 	direction += rand_range(-PI/4, PI/4);
 	collectible.rotation = direction;
 	collectible.set_linear_velocity(Vector2(rand_range(collectible.MIN_SPEED, collectible.MAX_SPEED), 0).rotated(direction));
+
+
+func _on_CollisionScoreTimer_timeout():
+	if !CollisionScoreLabelArray.empty() :
+		CollisionScoreLabelArray.pop_front().queue_free();
+	else:
+		$CollisionScoreTimer.stop();
+	

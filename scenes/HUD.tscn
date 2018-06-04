@@ -116,7 +116,7 @@ use_filter = false
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="HUD" type="CanvasLayer" index="0"]
+[node name="HUD" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -490,9 +490,9 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
 
-[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_gameOverTimeout"]
-
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_gameOverTimeout"]
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
 
