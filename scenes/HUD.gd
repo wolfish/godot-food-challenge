@@ -19,6 +19,8 @@ func show_message(text):
 	$MessageTimer.start();
 
 func show_game_over():
+	$MenuMusic.play();
+	$GameMusic.stop();
 	gameStarted = false;
 	show_message("KONIEC GRY!");
 	yield($MessageTimer, "timeout");
@@ -48,6 +50,8 @@ func _on_StartButton_pressed():
 	$Screen/Main/ButtonsContainer/ScoreButton.hide();
 	$Screen/Main/ButtonsContainer/OptionsButton.hide();
 	$Screen/Main/ButtonsContainer/ExitButton.hide();
+	$MenuMusic.stop();
+	$GameMusic.play();
 	gameStarted = true;
 	add_life();
 	emit_signal("start_game");

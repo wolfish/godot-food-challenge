@@ -29,6 +29,7 @@ func _ready():
 	randomize();
 
 func game_over():
+	$GameOverSound.play();
 	$Player.get_node('CollisionShape2D').disabled = true;
 	$Player.hide();
 	$MobTimer.stop();
@@ -80,6 +81,7 @@ func displayCollisionScoreLabel(score):
 	$CollisionScoreTimer.start();
 
 func collected():
+	$CollectSound.play();
 	score += scoreReward;
 	displayCollisionScoreLabel(scoreReward);
 	$HUD.update_score(score);
@@ -93,6 +95,7 @@ func collected():
 		$Player.scale = Vector2(newScale, newScale);
 
 func hit():
+	$HitSound.play();
 	if score > scorePenalty:
 		score -= scorePenalty;
 		displayCollisionScoreLabel(scorePenalty);
