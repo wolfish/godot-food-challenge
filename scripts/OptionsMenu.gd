@@ -13,7 +13,7 @@ const RES_640_ID = 1;
 
 var volumeSound = 10;
 var volumeMusic = 0;
-var selectedRes = null;
+var selectedRes = RES_800;
 
 func _ready():
 	$VBoxContainer/GridContainer/SoundSlider.value = volumeSound;
@@ -66,6 +66,8 @@ func _on_MusicSlider_value_changed(value):
 
 func _on_FullscreenCheck_pressed():
 	OS.window_fullscreen = !OS.window_fullscreen;
+	
 	if !OS.window_fullscreen:
 		OS.window_size = selectedRes;
-		emit_signal('init_screen');
+		
+	emit_signal('init_screen');
