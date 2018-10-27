@@ -2,14 +2,22 @@ extends Node
 
 export (PackedScene) var Mob;
 export (PackedScene) var Collectible;
+
+signal update_screensize(window_size);
+
 var score;
 var CollisionScoreLabelArray = [];
+var playSound = true;
 
 const scoreReward = 100;
 const scorePenalty = -200;
-const playerSpeedChange = 30;
+const playerSpeedChange = 60;
 
 func _ready():
+	init_screen();
+	randomize();
+	
+func init_screen():
 	# Center game window on screen
 	var screen_size = OS.get_screen_size();
 	var window_size = OS.get_window_size();
@@ -25,11 +33,12 @@ func _ready():
 	
 	# Center player position
 	$StartPosition.position = Vector2(window_size[0] / 2, window_size[1] / 2);
-	
-	randomize();
+	emit_signal('update_screensize', window_size);
 
 func game_over():
-	$GameOverSound.play();
+	if playSound:
+		$GameOverSound.play();
+	
 	$Player.get_node('CollisionShape2D').disabled = true;
 	$Player.hide();
 	$MobTimer.stop();
@@ -81,7 +90,9 @@ func displayCollisionScoreLabel(score):
 	$CollisionScoreTimer.start();
 
 func collected():
-	$CollectSound.play();
+	if playSound:
+		$CollectSound.play();
+		
 	score += scoreReward;
 	displayCollisionScoreLabel(scoreReward);
 	$HUD.update_score(score);
@@ -95,8 +106,10 @@ func collected():
 		$Player.scale = Vector2(newScale, newScale);
 
 func hit():
-	$HitSound.play();
-	if score > scorePenalty:
+	if playSound:
+		$HitSound.play();
+	
+	if score > abs(scorePenalty):
 		score -= scorePenalty;
 		displayCollisionScoreLabel(scorePenalty);
 	else:
@@ -132,4 +145,13 @@ func _on_CollisionScoreTimer_timeout():
 		CollisionScoreLabelArray.pop_front().queue_free();
 	else:
 		$CollisionScoreTimer.stop();
-	
+
+
+func sound_volume_changed(volume):
+	if volume != null:
+		playSound = true;
+		$HitSound.volume_db = volume;
+		$CollectSound.volume_db = volume;
+		$GameOverSound.volume_db = volume;
+	else:
+		playSound = false;

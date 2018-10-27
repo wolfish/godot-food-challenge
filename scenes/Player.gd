@@ -2,6 +2,7 @@ extends Area2D
 
 signal hit;
 signal collected;
+signal update_screensize(window_size);
 
 export (int) var SPEED;
 export (int) var HEALTH;
@@ -12,9 +13,12 @@ var lastAnimation = 'idle';
 
 func _ready():
 	hide();
-	screensize = get_viewport_rect().size;
+	update_screensize();
 	$move_idle.connect('timeout', self, '_on_timer_timeout');
 	$move.play();
+	
+func update_screensize(window_size = get_viewport_rect().size):
+	screensize = window_size;
 
 func _on_timer_timeout():
 	lastAnimation = 'idle';

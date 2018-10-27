@@ -1,7 +1,11 @@
 extends CanvasLayer
 
 signal start_game;
+signal init_screen;
+signal sound_volume_changed;
+
 var gameStarted = false;
+var playMusic = true;
 var gameTimeSeconds = 0;
 var gameTimeMinutes = 0;
 var LifeBar;
@@ -13,14 +17,17 @@ func _ready():
 	ScoreLabel = get_node('Screen/Main/TopBar/ScoreContainer/ScoreLabel');
 	TimeLabel = get_node('Screen/Main/TopBar/TimeContainer/TimeLabel');
 
+
 func show_message(text):
 	$Screen/Main/MessageLabel.text = text;
 	$Screen/Main/MessageLabel.show();
 	$MessageTimer.start();
 
 func show_game_over():
-	$MenuMusic.play();
-	$GameMusic.stop();
+	if playMusic:
+		$MenuMusic.play();
+		$GameMusic.stop();
+		
 	gameStarted = false;
 	show_message("KONIEC GRY!");
 	yield($MessageTimer, "timeout");
@@ -50,8 +57,11 @@ func _on_StartButton_pressed():
 	$Screen/Main/ButtonsContainer/ScoreButton.hide();
 	$Screen/Main/ButtonsContainer/OptionsButton.hide();
 	$Screen/Main/ButtonsContainer/ExitButton.hide();
-	$MenuMusic.stop();
-	$GameMusic.play();
+	
+	if playMusic:
+		$MenuMusic.stop();
+		$GameMusic.play();
+	
 	gameStarted = true;
 	add_life();
 	emit_signal("start_game");
@@ -76,3 +86,34 @@ func _on_ScoreTimer_timeout():
 		gameTimeMinutes += 1;
 		gameTimeSeconds = 0;
 	update_time(gameTimeMinutes, gameTimeSeconds);
+
+
+func _on_OptionsButton_pressed():
+	$Screen.visible = false;
+	$OptionsMenu.visible = true;
+
+
+func _on_OptionsMenu_init_screen():
+	emit_signal('init_screen');
+
+
+func _on_OptionsMenu_visibility_changed():
+	if !$OptionsMenu.visible:
+		$Screen.visible = true;
+
+
+func sound_volume_changed(volume):
+	emit_signal('sound_volume_changed', volume);
+
+func music_volume_changed(volume):
+	if volume == null:
+		$MenuMusic.stop();
+		playMusic = false;
+	else:
+		playMusic = true;
+		
+		if !$MenuMusic.playing:
+			$MenuMusic.play();
+			
+		$MenuMusic.volume_db = volume;
+		$GameMusic.volume_db = volume;
