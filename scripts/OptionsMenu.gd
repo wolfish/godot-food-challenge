@@ -43,11 +43,12 @@ func _on_resolution_select(id):
 			selectedRes = RES_640;
 	
 	OS.window_size = selectedRes;
-	emit_signal('init_screen');
 	
 	if OS.window_fullscreen:
 		OS.window_fullscreen = false;
 		OS.window_fullscreen = true;
+		
+	emit_signal('init_screen');
 
 
 func _on_SaveButton_pressed():

@@ -21,7 +21,11 @@ func init_screen():
 	# Center game window on screen
 	var screen_size = OS.get_screen_size();
 	var window_size = OS.get_window_size();
-	OS.set_window_position(screen_size*0.5 - window_size*0.5);
+	
+	if OS.window_fullscreen:
+		window_size = screen_size;
+	else:
+		OS.set_window_position(screen_size*0.5 - window_size*0.5);
 	
 	# Set mob path around the screen edges
 	$MobPath.curve.clear_points();

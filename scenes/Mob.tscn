@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/Mob.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Mob.gd" type="Script" id=1]
 [ext_resource path="res://sprites/projectiles/negative/cooking_1.png" type="Texture" id=2]
 [ext_resource path="res://sprites/projectiles/negative/apple_1.png" type="Texture" id=3]
+
 
 [sub_resource type="SpriteFrames" id=1]
 

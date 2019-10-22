@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/Main.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Collectible.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=4]
@@ -10,132 +10,62 @@
 [ext_resource path="res://audio/gameover.ogg" type="AudioStream" id=8]
 
 [sub_resource type="Curve2D" id=1]
-
-bake_interval = 5.0
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -0.814972, -1.08249, 0, 0, 0, 0, 640.863, -1.98499, 0, 0, 0, 0, 639.96, 483.56, 0, 0, 0, 0, 0.0875244, 480.853, 0, 0, 0, 0, -0.814972, -1.08249 )
 }
 
 [node name="Main" type="Node"]
-
 script = ExtResource( 1 )
 Mob = ExtResource( 2 )
 Collectible = ExtResource( 3 )
 
-[node name="Player" parent="." index="0" instance=ExtResource( 4 )]
-
+[node name="Player" parent="." instance=ExtResource( 4 )]
 SPEED = 300
 HEALTH = 1
 MAXHEALTH = 3
 
-[node name="MobTimer" type="Timer" parent="." index="1"]
-
-process_mode = 1
+[node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
-one_shot = false
-autostart = false
 
-[node name="CollectibleTimer" type="Timer" parent="." index="2"]
+[node name="CollectibleTimer" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
+[node name="ScoreTimer" type="Timer" parent="."]
 
-[node name="ScoreTimer" type="Timer" parent="." index="3"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="StartTimer" type="Timer" parent="." index="4"]
-
-process_mode = 1
+[node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-autostart = false
 
-[node name="CollisionScoreTimer" type="Timer" parent="." index="5"]
-
-process_mode = 1
+[node name="CollisionScoreTimer" type="Timer" parent="."]
 wait_time = 0.5
-one_shot = false
-autostart = false
 
-[node name="StartPosition" type="Position2D" parent="." index="6"]
-
+[node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 322.128, 191.885 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="MobPath" type="Path2D" parent="." index="7"]
-
-self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+[node name="MobPath" type="Path2D" parent="."]
 curve = SubResource( 1 )
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
-
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2( -0.814972, -1.08249 )
 rotation = -0.00140652
-offset = 0.0
-h_offset = 0.0
-v_offset = 0.0
-rotate = true
-cubic_interp = true
-loop = true
-lookahead = 4.0
 
-[node name="HUD" parent="." index="8" instance=ExtResource( 5 )]
+[node name="HUD" parent="." instance=ExtResource( 5 )]
 
-[node name="HitSound" type="AudioStreamPlayer" parent="." index="9"]
-
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
 stream = ExtResource( 6 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-_sections_unfolded = [ "Pause" ]
 
-[node name="CollectSound" type="AudioStreamPlayer" parent="." index="10"]
-
+[node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
 
-[node name="GameOverSound" type="AudioStreamPlayer" parent="." index="11"]
-
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-
 [connection signal="update_screensize" from="." to="Player" method="update_screensize"]
-
 [connection signal="collected" from="Player" to="." method="collected"]
-
 [connection signal="hit" from="Player" to="." method="hit"]
-
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
-
 [connection signal="timeout" from="CollectibleTimer" to="." method="_on_CollectibleTimer_timeout"]
-
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
-
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
-
 [connection signal="timeout" from="CollisionScoreTimer" to="." method="_on_CollisionScoreTimer_timeout"]
-
 [connection signal="init_screen" from="HUD" to="." method="init_screen"]
-
 [connection signal="sound_volume_changed" from="HUD" to="." method="sound_volume_changed"]
-
 [connection signal="start_game" from="HUD" to="." method="new_game"]
-
-
